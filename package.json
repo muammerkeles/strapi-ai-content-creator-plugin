@@ -1,5 +1,5 @@
 {
-  "version": "0.0.0",
+  "version": "1.0.0",
   "keywords": [],
   "type": "commonjs",
   "exports": {
@@ -51,11 +51,11 @@
   "strapi": {
     "kind": "plugin",
     "name": "ai-content-creator",
-    "displayName": "Content Creator With AI",
+    "displayName": "Strapi Content Creator With AI",
     "description": "Create Content With Open AI & Gemini"
   },
   "name": "ai-content-creator",
-  "description": "Create Content With Open AI & Gemini",
+  "description": "Strapi Create Content With Open AI & Gemini",
   "license": "MIT",
   "repository": {
     "type": "git",
@@ -65,5 +65,5 @@
     "url": "https://github.com/muammerkeles/strapi-ai-content-creator-plugin/issues"
   },
   "homepage": "https://github.com/muammerkeles/strapi-ai-content-creator-plugin#readme",
-  "author": " K. <wwebmaster.kls@gmail.com>"
+  "author": " Muammer K. <wwebmaster.kls@gmail.com>"
 }

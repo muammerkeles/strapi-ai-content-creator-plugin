@@ -1,0 +1,194 @@
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __commonJS = (cb, mod) => function __require() {
+  return mod || (0, cb[__getOwnPropNames(cb)[0]])((mod = { exports: {} }).exports, mod), mod.exports;
+};
+
+// dist/_chunks/App-DIFvKZKj.js
+var require_App_DIFvKZKj = __commonJS({
+  "dist/_chunks/App-DIFvKZKj.js"(exports2) {
+    "use strict";
+    Object.defineProperty(exports2, Symbol.toStringTag, { value: "Module" });
+    var jsxRuntime = require("react/jsx-runtime");
+    var admin = require("@strapi/strapi/admin");
+    var reactRouterDom = require("react-router-dom");
+    var designSystem = require("@strapi/design-system");
+    var reactIntl = require("react-intl");
+    var index = require_index_0XCcI_Ey();
+    var getTranslation = (id) => `${index.PLUGIN_ID}.${id}`;
+    var HomePage = () => {
+      const { formatMessage } = reactIntl.useIntl();
+      return /* @__PURE__ */ jsxRuntime.jsx(designSystem.Main, { children: /* @__PURE__ */ jsxRuntime.jsxs("h1", { children: [
+        "Welcome to ",
+        formatMessage({ id: getTranslation("plugin.name") })
+      ] }) });
+    };
+    var App = () => {
+      return /* @__PURE__ */ jsxRuntime.jsxs(reactRouterDom.Routes, { children: [
+        /* @__PURE__ */ jsxRuntime.jsx(reactRouterDom.Route, { index: true, element: /* @__PURE__ */ jsxRuntime.jsx(HomePage, {}) }),
+        /* @__PURE__ */ jsxRuntime.jsx(reactRouterDom.Route, { path: "*", element: /* @__PURE__ */ jsxRuntime.jsx(admin.Page.Error, {}) })
+      ] });
+    };
+    exports2.App = App;
+  }
+});
+
+// dist/_chunks/en-B4KWt_jN.js
+var require_en_B4KWt_jN = __commonJS({
+  "dist/_chunks/en-B4KWt_jN.js"(exports2) {
+    "use strict";
+    Object.defineProperty(exports2, Symbol.toStringTag, { value: "Module" });
+    var en = {};
+    exports2.default = en;
+  }
+});
+
+// dist/_chunks/index-0XCcI-Ey.js
+var require_index_0XCcI_Ey = __commonJS({
+  "dist/_chunks/index-0XCcI-Ey.js"(exports2) {
+    "use strict";
+    var react = require("react");
+    var jsxRuntime = require("react/jsx-runtime");
+    var icons = require("@strapi/icons");
+    var __variableDynamicImportRuntimeHelper = (glob, path, segs) => {
+      const v = glob[path];
+      if (v) {
+        return typeof v === "function" ? v() : Promise.resolve(v);
+      }
+      return new Promise((_, reject) => {
+        (typeof queueMicrotask === "function" ? queueMicrotask : setTimeout)(
+          reject.bind(
+            null,
+            new Error(
+              "Unknown variable dynamic import: " + path + (path.split("/").length !== segs ? ". Note that variables only represent file names one level deep." : "")
+            )
+          )
+        );
+      });
+    };
+    var PLUGIN_ID = "ai-content-creator";
+    var Initializer = ({ setPlugin }) => {
+      const ref = react.useRef(setPlugin);
+      react.useEffect(() => {
+        ref.current(PLUGIN_ID);
+      }, []);
+      return null;
+    };
+    var PluginIcon = () => /* @__PURE__ */ jsxRuntime.jsx(icons.PuzzlePiece, {});
+    var index = {
+      register(app) {
+        app.addMenuLink({
+          to: `plugins/${PluginIcon}`,
+          icon: PluginIcon,
+          intlLabel: {
+            id: `${PLUGIN_ID}.plugin.name`,
+            defaultMessage: PLUGIN_ID
+          },
+          Component: async () => {
+            const { App } = await Promise.resolve().then(() => require_App_DIFvKZKj());
+            return App;
+          }
+        });
+        app.registerPlugin({
+          id: PLUGIN_ID,
+          initializer: Initializer,
+          isReady: false,
+          name: PLUGIN_ID
+        });
+      },
+      async registerTrads({ locales }) {
+        return Promise.all(
+          locales.map(async (locale) => {
+            try {
+              const { default: data } = await __variableDynamicImportRuntimeHelper(/* @__PURE__ */ Object.assign({ "./translations/en.json": () => Promise.resolve().then(() => require_en_B4KWt_jN()) }), `./translations/${locale}.json`, 3);
+              return { data, locale };
+            } catch {
+              return { data: {}, locale };
+            }
+          })
+        );
+      }
+    };
+    exports2.PLUGIN_ID = PLUGIN_ID;
+    exports2.index = index;
+  }
+});
+
+// dist/admin/index.js
+var require_admin = __commonJS({
+  "dist/admin/index.js"(exports2, module2) {
+    "use strict";
+    var index = require_index_0XCcI_Ey();
+    module2.exports = index.index;
+  }
+});
+
+// dist/server/index.js
+var require_server = __commonJS({
+  "dist/server/index.js"(exports2, module2) {
+    "use strict";
+    var bootstrap = ({ strapi }) => {
+    };
+    var destroy = ({ strapi }) => {
+    };
+    var register = ({ strapi }) => {
+    };
+    var config = {
+      default: {},
+      validator() {
+      }
+    };
+    var contentTypes = {};
+    var controller = ({ strapi }) => ({
+      index(ctx) {
+        ctx.body = strapi.plugin("ai-content-creator").service("service").getWelcomeMessage();
+      }
+    });
+    var controllers = {
+      controller
+    };
+    var middlewares = {};
+    var policies = {};
+    var contentAPIRoutes = [
+      {
+        method: "GET",
+        path: "/",
+        // name of the controller file & the method.
+        handler: "controller.index",
+        config: {
+          policies: []
+        }
+      }
+    ];
+    var routes = {
+      "content-api": {
+        type: "content-api",
+        routes: contentAPIRoutes
+      }
+    };
+    var service = ({ strapi }) => ({
+      getWelcomeMessage() {
+        return "Welcome to Strapi \u{1F680}";
+      }
+    });
+    var services = {
+      service
+    };
+    var index = {
+      bootstrap,
+      destroy,
+      register,
+      config,
+      controllers,
+      contentTypes,
+      middlewares,
+      policies,
+      routes,
+      services
+    };
+    module2.exports = index;
+  }
+});
+
+// <stdin>
+require_admin();
+require_server();

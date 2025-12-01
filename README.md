@@ -34,5 +34,6 @@ module.exports = ({ env }) => {
 
 
 Then
-<img width="1343" height="913" alt="image" src="https://github.com/user-attachments/assets/0cf2c4fc-7284-4a82-bf39-e4e3d7de897f" />
 
+
+<img width="1343" height="913" alt="image" src="https://github.com/user-attachments/assets/1619bccf-095c-4d4b-99c9-f8c6cbc46de3" />

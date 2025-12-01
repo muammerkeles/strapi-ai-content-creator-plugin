@@ -7,6 +7,11 @@ To start using the plugin, add the following configuration to your Strapi projec
 
 This setup enables the plugin and allows you to configure API keys and specify which Content Types the AI button should appear on.
 
+NOTE: Gemini is not implemented yet.
+Open AI is ready to use.
+
+
+
 ```javascript
 // config/plugins.js (or similar configuration file)
 
@@ -32,5 +37,7 @@ module.exports = ({ env }) => {
   }
 };
 
-<img width="1343" height="913" alt="image" src="https://github.com/user-attachments/assets/5234e250-7f85-42c7-819d-0a8318a0a20e" />
+ ```
 
+Result:
+<img width="1343" height="913" alt="image" src="https://github.com/user-attachments/assets/064e61eb-a818-4358-9af1-aecc7776e2d0" />

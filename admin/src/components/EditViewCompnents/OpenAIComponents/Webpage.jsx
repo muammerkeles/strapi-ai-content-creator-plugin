@@ -332,7 +332,7 @@ const OpenAIForWebpage = ({ config }) => {
                         <Textarea
                             label="Prompt girin"
                             name="prompt"
-                            placeholder="Örneğin: 'Havuz temizliği ve montajı ile yapan bir işletme için hakkımızda yazısı oluştur. 5 paragraflık olsun, özellikle Ankara şehir ismini vurgula. Seo etiketleri de oluştur'"
+                            placeholder="Example: 'Create a 5-paragraph, SEO-friendly 'About Us' page for my agency's website in Istanbul.'"
                             value={prompt}
                             onChange={(e) => setPrompt(e.target.value)}
                         />

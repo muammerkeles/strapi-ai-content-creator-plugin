@@ -2,8 +2,7 @@ import { getTranslation } from './utils/getTranslation';
 import { PLUGIN_ID } from './pluginId';
 import { Initializer } from './components/Initializer';
 import { PluginIcon } from './components/PluginIcon';
-import OpenAIContentCreator from './components/EditViewCompnents/OpenAIContentCreator';
-import GeminiContentCreator from './components/EditViewCompnents/GeminiContentCreator';
+import ContentCreator from './components/EditViewCompnents/ContentCreator';
 
 export default {
   bootstrap(app) {
@@ -18,7 +17,7 @@ export default {
 
     if (cmPlugin) {
 
-      app.getPlugin('content-manager').apis.addEditViewSidePanel([OpenAIContentCreator,GeminiContentCreator]);
+      app.getPlugin('content-manager').apis.addEditViewSidePanel([ContentCreator]);
     }
   },
   register(app) {

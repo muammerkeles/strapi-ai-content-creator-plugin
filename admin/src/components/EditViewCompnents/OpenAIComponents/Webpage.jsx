@@ -8,13 +8,61 @@ import { Quotes } from '@strapi/icons';
 import { useNotification } from '@strapi/strapi/admin';
 import { PLUGIN_ID } from '../../../pluginId';
 
-const OpenAIForWebpage = () => {
+const OpenAIForWebpage = ({ config }) => {
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        // config objesinin geldiğinden emin olduktan sonra loading durumunu yönetiriz.
+        // Bu hook sadece config.apiKey değiştiğinde (veya ilk yüklendiğinde) çalışır.
+        if (config && typeof config.apiKey === 'string') {
+            // API key kontrolü yapıldıktan sonra loading'i kapatabiliriz.
+            setLoading(false);
+
+            // API key'in bulunmadığı senaryoda zaten setLoading(false) çalışmış olacak.
+            if (!config.apiKey) {
+                //console.warn("Open AI API Key Not Found.", config);
+            }
+        }
+
+        //console.warn("Open AI Config:", config);
+
+    }, [config]);
+
+    // Yükleme durumu gösterimi
+    if (loading && !config) {
+        return (
+            <>
+                <p style={{ fontSize: '1rem' }}>loading Chat Gpt ...</p>
+            </>
+        )
+    }else
+    // API Anahtarı yoksa (setLoading(false) useEffect içinde ayarlandı)
+    if (!config.apiKey) {
+        return (
+            <>
+                <p style={{ fontSize: '1rem' }}>Warn: (Chat Gpt API KEY Not Found!)</p>
+            </>
+
+        )
+    }
+
     const { contentType, form } = useContentManagerContext();
     const { toggleNotification } = useNotification();
+
+
+    /*if (contentType?.uid !== 'api::webpage.webpage') {
+        return (
+            <>
+                <p style={{ fontSize: '1rem' }} title="Gpt is Disabled for this page. Activate in config file">Disabled</p>
+            </>
+
+        )
+    }*/
+
+
     // global bir değişken atamak için bunu kullanailiriz
     const { values } = form;
     const { post, get } = useFetchClient();
-    const [loading, setLoading] = useState(false);
     const [showModal, setShowModal] = useState(false);
     const [isMetaTitle, setisMetaTitle] = useState(true);
     const [isMetaKeyw, setisMetaKeyw] = useState(true);
@@ -46,32 +94,14 @@ const OpenAIForWebpage = () => {
     //window.editViewFormValues = values;
     console.log("contentype", contentType.uid);
 
-    if (contentType?.uid !== 'api::webpage.webpage') {
+    /*if (contentType?.uid !== 'api::webpage.webpage') {
         return {
             title: 'Open AI',
             content: <p style={{ fontSize: '1rem' }}>Unavailable</p>,
         };
-    }
-
-    useEffect(() => {
-        const getApiKey = async () => {
-            const res = await get(`/${PLUGIN_ID}/config`);
-            const data = await res.data;
-            console.warn("config 2.", data);
-
-            if (!data?.openAIApiKey) {
-                console.warn("Open AI API Key bulunamadı.");
-                alert('OpenAI Api Key yok!');
-                setLoading(true);
-            }
-
-            setOpenAiApiKey(data?.openAIApiKey)
-        };
-        console.log("get api key");
-        getApiKey();
+    }*/
 
 
-    }, []);
 
     const completionAPI = async ({
         model,
@@ -82,7 +112,7 @@ const OpenAIForWebpage = () => {
         if (!openAiApiKey) {
             toggleNotification({
                 type: 'danger',
-                message: 'Hata : Bir Api Key yok!'
+                message: 'ERror : Api Key Not Found!'
             });
             return;
         }
@@ -112,8 +142,8 @@ const OpenAIForWebpage = () => {
     }
 
     const handlePromptSubmit = () => {
-        if (isGenerating){
-           toggleNotification({
+        if (isGenerating) {
+            toggleNotification({
                 type: 'warning',
                 message: 'Please wait..'
             });
@@ -129,7 +159,7 @@ const OpenAIForWebpage = () => {
             return;
 
         }
-        let pr = "Çıktıyı json formatında ver. Yorum katma. Sadece istenilenleri ver. İçerik için 'content' keyini kullan json formatı için.";
+        let pr = "Çıktıyı json formatında ver. Yorum katma. Sadece istenilenleri ver. İçerik için 'content' keyini kullan json formatı için. Prompt hangi dilde verilmişse sen de çıktıyı o dilde ver.";
 
         if (isMetaDescr) {
             pr += "Ayrıca seo uyumlu olması için Meta Description da lazım, bu en fazla 150 karakter olsun.'description' keyini kullan json formatı için.";
@@ -170,7 +200,7 @@ const OpenAIForWebpage = () => {
     };
 
     const handleApplyContent = () => {
-        alert('Hazır değil');
+        alert('TO-DO');
     }
 
     const handleShowModal = async () => {
@@ -181,7 +211,7 @@ const OpenAIForWebpage = () => {
         navigator.clipboard.writeText(value);
         toggleNotification({
             type: 'info',
-            message: 'Kopyalandı'
+            message: 'Copied'
         });
     }
     useEffect(() => {
@@ -222,7 +252,7 @@ const OpenAIForWebpage = () => {
             setTable(MyTable);
         } catch (error) {
             console.error("JSON parse error:", error);
-            setTable(<div style={{ fontSize: '1.3rem', color: 'red' }}>Invalid JSON data. Finish Reason : {finishReason} {finishReason == 'length' ? "(Max Tokenı artırın)" : ""}</div>);
+            setTable(<div style={{ fontSize: '1.3rem', color: 'red' }}>Invalid JSON data. Finish Reason : {finishReason} {finishReason == 'length' ? "(Increase 'Max Token')" : ""}</div>);
         }
     }, [completion])
 

@@ -20,7 +20,7 @@ module.exports = ({ env }) => {
     'ai-content-creator': {
       enabled: true,
       // The 'resolve' path is typically only required when the plugin is installed locally.
-      resolve: './src/plugins/ai-content-creator', 
+      // resolve: './src/plugins/ai-content-creator', 
       config: {
         openAi:{
           enabled: true,

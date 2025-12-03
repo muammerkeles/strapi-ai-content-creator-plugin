@@ -29,11 +29,15 @@ module.exports = ({ env }) => {
           enabled: true,
           apiKey: env("OPEN_AI_KEY", ""), // Fetches API key from an Environment Variable
           contentList:["api::webpage.webpage"] // Specifies the Content Types where the plugin's UI should be visible
+          // OR
+          contentList:[] // leave it empty if you want the plugin's UI visible in all pages
         },
         gemini:{
           enabled: true,
           apiKey: env("GEMINI_AI_KEY", ""), // Fetches API key from an Environment Variable
           contentList:["api::webpage.webpage"] // Specifies the Content Types where the plugin's UI should be visible
+          // OR
+          contentList:[] //  leave it empty if you want the plugin's UI visible in all pages
         }
       },
     },

@@ -23,8 +23,6 @@ const OpenAIForWebpage = ({ config }) => {
             //setOpenAiApiKey(config.apiKey);
         }
 
-        console.warn("Open AI Config:", config);
-
     }, [config]);
 
     // Yükleme durumu gösterimi
@@ -175,10 +173,10 @@ const OpenAIForWebpage = ({ config }) => {
             return;
         }
 
-        console.log(model)
-        console.log(prompt)
-        console.log(temperature)
-        console.log(maxTokens)
+        console.log("Model:",model)
+        console.log("Prompt:",prompt)
+        console.log("Tempreture:",temperature)
+        console.log("MaxToken:",maxTokens)
         if (!prompt) {
             alert("Enter a prompt!!");
             return;
@@ -212,7 +210,6 @@ const OpenAIForWebpage = ({ config }) => {
                     }else{
 
                         let cleaned = data?.choices[0]?.message?.content?.trim()?.replace(/```json|```/g, '').trim();
-                        console.log("result", cleaned);   
                         setCompletion(cleaned);//data?.choices[0]?.message.trim());
                         setFinishReason(data?.choices[0]?.finish_reason);
                     }

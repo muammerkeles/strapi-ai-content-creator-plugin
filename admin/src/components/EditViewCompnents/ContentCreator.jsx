@@ -15,22 +15,18 @@ const ContentCreator = (props) => {
         const getApiKey = async () => {
             const res = await get(`/${PLUGIN_ID}/config`);
             const data = await res.data;
-            console.warn("Content Creator configs", data);
 
             if (data?.openAi) {
-                console.warn("OpenAi config : ", data.openAi);
                 setOpenAi(data.openAi);
             }
             if (data?.gemini) {
-                console.warn("Gemini config : ", data.gemini);
                 setGemini(data.gemini);
-
             }
 
             setLoading(false);
 
         };
-        console.log("Obtaining Content Creator configurations");
+        console.log("Obtaining Content Creator's configurations");
         getApiKey();
 
 

@@ -6,7 +6,6 @@ import {
 } from '@strapi/design-system';
 import { Quotes } from '@strapi/icons';
 import { useNotification } from '@strapi/strapi/admin';
-import { PLUGIN_ID } from '../../../pluginId';
 
 const OpenAIForWebpage = ({ config }) => {
     const [loading, setLoading] = useState(true);
@@ -17,14 +16,14 @@ const OpenAIForWebpage = ({ config }) => {
         if (config && typeof config.apiKey === 'string') {
             // API key kontrolü yapıldıktan sonra loading'i kapatabiliriz.
             setLoading(false);
-
             // API key'in bulunmadığı senaryoda zaten setLoading(false) çalışmış olacak.
-            if (!config.apiKey) {
-                //console.warn("Open AI API Key Not Found.", config);
-            }
+            //if (!config.apiKey) {
+            //console.warn("Open AI API Key Not Found.", config);
+            //}
+            //setOpenAiApiKey(config.apiKey);
         }
 
-        //console.warn("Open AI Config:", config);
+        console.warn("Open AI Config:", config);
 
     }, [config]);
 
@@ -35,34 +34,29 @@ const OpenAIForWebpage = ({ config }) => {
                 <p style={{ fontSize: '1rem' }}>loading Chat Gpt ...</p>
             </>
         )
-    }else
-    // API Anahtarı yoksa (setLoading(false) useEffect içinde ayarlandı)
-    if (!config.apiKey) {
-        return (
-            <>
-                <p style={{ fontSize: '1rem' }}>Warn: (Chat Gpt API KEY Not Found!)</p>
-            </>
+    } else
+        // API Anahtarı yoksa (setLoading(false) useEffect içinde ayarlandı)
+        if (!config.apiKey) {
+            return (
+                <>
+                    <p style={{ fontSize: '1rem' }}>Warn: (Chat Gpt API KEY Not Found!)</p>
+                </>
 
-        )
-    }
+            )
+        }
 
     const { contentType, form } = useContentManagerContext();
+    //const { values } = form;
+
     const { toggleNotification } = useNotification();
 
+    if (config && config?.contentList && config?.contentList.length>0 && !config?.contentList.includes(contentType?.uid)) {
+        //if (contentType?.uid !== 'api::webpage.webpage') {
+        return <>
+            <p style={{ fontSize: '1rem' }} title="OpenAi is inactive for this page">GPT is Inactive!</p>
+        </>
+    }
 
-    /*if (contentType?.uid !== 'api::webpage.webpage') {
-        return (
-            <>
-                <p style={{ fontSize: '1rem' }} title="Gpt is Disabled for this page. Activate in config file">Disabled</p>
-            </>
-
-        )
-    }*/
-
-
-    // global bir değişken atamak için bunu kullanailiriz
-    const { values } = form;
-    const { post, get } = useFetchClient();
     const [showModal, setShowModal] = useState(false);
     const [isMetaTitle, setisMetaTitle] = useState(true);
     const [isMetaKeyw, setisMetaKeyw] = useState(true);
@@ -74,32 +68,63 @@ const OpenAIForWebpage = ({ config }) => {
     const [table, setTable] = useState(<></>);
     const [completion, setCompletion] = useState(undefined);
     const [finishReason, setFinishReason] = useState(null);
-    const [openAiApiKey, setOpenAiApiKey] = useState(null);
 
     const [defaultSettings, setDefaultSettings] = useState({
         model: 'gpt-4.1-mini',
         temperature: 1,
         maxTokens: 500,
-        models: [
-            'gpt-4.1-mini',
-            'o4-mini'
-        ]
-    });
-    const [model, setModel] = useState(defaultSettings?.model);
+        models: ['gpt-4.1-mini','o4-mini']
+    }); // Güncel modelleri fetch etmedenönce bunları default olarak yükleyelim
+
+    const [availableModels, setAvailableModels] = useState([]); // Kullanılabilir modeller listesi
+    const [model, setModel] = useState([]);
+    const [modelLoading, setModelLoading] = useState(false);
     const [temperature, setTemperature] = useState(defaultSettings?.temperature)
     const [maxTokens, setMaxTokens] = useState(defaultSettings?.maxTokens);
     const [isGenerating, setIsGenerating] = useState(!1);
 
-    //console.log("window.editViewFormValues", values);
-    //window.editViewFormValues = values;
-    console.log("contentype", contentType.uid);
+    useEffect(() => {
 
-    /*if (contentType?.uid !== 'api::webpage.webpage') {
-        return {
-            title: 'Open AI',
-            content: <p style={{ fontSize: '1rem' }}>Unavailable</p>,
-        };
-    }*/
+        if (modelLoading || loading || !config.apiKey) return;
+
+        if (availableModels.length == 0) {
+            setModelLoading(true);
+            const fetchOpenAiModels = async () => {
+                try {
+                    const url = 'https://api.openai.com/v1/models';
+                    const response = await fetch(
+                        url,
+                        {
+                            method: 'GET',
+                            headers: {
+                                'Content-Type': 'application/json',
+                                Authorization: `Bearer ${config.apiKey}`
+                            },
+                        });
+                    if (!response.ok) {
+                        throw new Error(`HTTP Error Code (OpenAi Models Fetch): ${response.status}`);
+                    }
+                    const res = await response.json();
+                    const modelIds = res.data.map(m => m.id);
+                    setAvailableModels(modelIds);
+                    if (modelIds.length > 0 && !modelIds.includes(model)) {
+                        setModel(modelIds[0]);
+                    }
+                    console.log('OpenAI modelleri başarıyla alındı.');
+                    setModelLoading(false);
+
+                } catch (error) {
+                    setModelLoading(false);
+
+                    console.error('OpenAI modelleri alınamadı:', error);
+                    setAvailableModels(defaultSettings.models);
+                }
+            }
+            fetchOpenAiModels();
+        }
+    }, [loading, modelLoading, config.apiKey, availableModels])
+
+
 
 
 
@@ -109,7 +134,7 @@ const OpenAIForWebpage = ({ config }) => {
         temperature,
         maxTokens,
     }) => {
-        if (!openAiApiKey) {
+        if (!config.apiKey) {
             toggleNotification({
                 type: 'danger',
                 message: 'ERror : Api Key Not Found!'
@@ -123,7 +148,7 @@ const OpenAIForWebpage = ({ config }) => {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
-                        Authorization: `Bearer ${openAiApiKey}`
+                        Authorization: `Bearer ${config.apiKey}`
                     },
                     body: JSON.stringify({
                         model,
@@ -155,7 +180,7 @@ const OpenAIForWebpage = ({ config }) => {
         console.log(temperature)
         console.log(maxTokens)
         if (!prompt) {
-            alert("Prompt girin!");
+            alert("Enter a prompt!!");
             return;
 
         }
@@ -192,7 +217,7 @@ const OpenAIForWebpage = ({ config }) => {
                     setFinishReason(data?.choices[0]?.finish_reason);
                 })
                 .finally(() => {
-                    console.log("final");
+                    console.log("Finished");
                     setIsGenerating(!1);
                     setGenerateCompletionText('Generate');
                 });
@@ -214,6 +239,8 @@ const OpenAIForWebpage = ({ config }) => {
             message: 'Copied'
         });
     }
+
+
     useEffect(() => {
 
         if (!completion) {
@@ -279,7 +306,7 @@ const OpenAIForWebpage = ({ config }) => {
                         <Grid.Root>
                             <Grid.Item padding={1} col={3} s={12}>
                                 <Box color="neutral800">
-                                    <label>Model</label>
+                                    <label>{modelLoading && "Loading.."}{"Model"}</label>
                                     <SingleSelect
                                         id="select1"
                                         label="Models"
@@ -287,9 +314,9 @@ const OpenAIForWebpage = ({ config }) => {
                                         onChange={setModel}
                                         selectButtonTitle="Carret Down Button"
                                     >
-                                        {defaultSettings &&
-                                            defaultSettings?.models?.map((model) => (
-                                                <SingleSelectOption value={model}>{model}</SingleSelectOption>
+                                        {availableModels &&
+                                            availableModels?.map((model) => (
+                                                <SingleSelectOption key={model} value={model}>{model}</SingleSelectOption>
                                             ))}
                                     </SingleSelect>
                                 </Box>

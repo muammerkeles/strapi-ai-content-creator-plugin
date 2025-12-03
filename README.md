@@ -58,11 +58,9 @@ Thank you for considering supporting this project! Maintaining and developing ne
 * **[External Platform (e.g., Ko-fi)]:** Buy us a one-time "coffee" to say thanks.
 
 [![GitHub Sponsor Button](https://img.shields.io/static/v1?label=GitHub&message=Sponsor&color=brightgreen&logo=github)](https://github.com/sponsors/muammerkeles)
-[![Ko-fi Button](https://img.shields.io/static/v1?label=Buy%20Me%20a%20Coffee&message=Donate&color=orange&logo=ko-fi)](https://ko-fi.com/YOUR_LINK)
+[![Ko-fi Button](https://img.shields.io/static/v1?label=Buy%20Me%20a%20Coffee&message=Donate&color=orange&logo=ko-fi)](https://ko-fi.com/muammerkeles)
 
 ## 💖 Desteğiniz İçin
 
 Bu projeyi desteklediğiniz için teşekkür ederiz! Açık kaynak yazılımların bakımı ve yeni özelliklerin geliştirilmesi zaman ve çaba gerektirir. Bize destek olmak için aşağıdaki kanalları kullanabilirsiniz:
 
-* **GitHub Sponsors:** Projenin geleceğine katkıda bulunun ve özel avantajlara erişin.
-* **[Harici Platform (örneğin Ko-fi)]:** Bize tek seferlik bir "kahve" ısmarlayın.

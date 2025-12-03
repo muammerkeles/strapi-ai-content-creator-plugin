@@ -10,6 +10,9 @@ This setup enables the plugin and allows you to configure API keys and specify w
 NOTE: Gemini is not implemented yet.
 Open AI is ready to use.
 
+[![GitHub Sponsor Düğmesi](https://img.shields.io/static/v1?label=GitHub&message=Sponsor&color=brightgreen&logo=github)](https://github.com/sponsors/KULLANICI_ADINIZI_YAZIN)
+[![Ko-fi Düğmesi](https://img.shields.io/static/v1?label=Bize%20Kahve%20Ismarla&message=Destek%20Ol&color=orange&logo=ko-fi)](https://ko-fi.com/LINK_ADRESINIZI_YAZIN)
+
 
 
 ```javascript
@@ -39,7 +42,27 @@ module.exports = ({ env }) => {
 
  ```
 
-Result:
+Usage :
 <img width="1343" height="913" alt="image" src="https://github.com/user-attachments/assets/064e61eb-a818-4358-9af1-aecc7776e2d0" />
 
 <img width="1499" height="1021" alt="image" src="https://github.com/user-attachments/assets/8a930175-4912-4f66-b05c-9c08e7217999" />
+
+
+
+
+## 💖 Support This Project
+
+Thank you for considering supporting this project! Maintaining and developing new features for open-source software takes time and effort. You can support us via the channels below:
+
+* **GitHub Sponsors:** Contribute to the project's future and gain access to special perks.
+* **[External Platform (e.g., Ko-fi)]:** Buy us a one-time "coffee" to say thanks.
+
+[![GitHub Sponsor Button](https://img.shields.io/static/v1?label=GitHub&message=Sponsor&color=brightgreen&logo=github)](https://github.com/sponsors/muammerkeles)
+[![Ko-fi Button](https://img.shields.io/static/v1?label=Buy%20Me%20a%20Coffee&message=Donate&color=orange&logo=ko-fi)](https://ko-fi.com/YOUR_LINK)
+
+## 💖 Desteğiniz İçin
+
+Bu projeyi desteklediğiniz için teşekkür ederiz! Açık kaynak yazılımların bakımı ve yeni özelliklerin geliştirilmesi zaman ve çaba gerektirir. Bize destek olmak için aşağıdaki kanalları kullanabilirsiniz:
+
+* **GitHub Sponsors:** Projenin geleceğine katkıda bulunun ve özel avantajlara erişin.
+* **[Harici Platform (örneğin Ko-fi)]:** Bize tek seferlik bir "kahve" ısmarlayın.

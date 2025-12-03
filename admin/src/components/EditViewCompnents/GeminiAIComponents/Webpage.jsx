@@ -8,7 +8,7 @@ const GeminiForWebpage = ({ config }) => {
         const [loading, setLoading] = useState(false);
     
     const handleShowModal=()=>{
-        alert('This feature will be impleneted in next version.')
+        alert('This feature will be implemeted in next version.')
     }
     return (
         <>

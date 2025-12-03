@@ -209,12 +209,13 @@ const OpenAIForWebpage = ({ config }) => {
                             type: 'danger',
                             message: 'Error : ' + data?.error?.message
                         });
-                    }
-                    let cleaned = data?.choices[0]?.message?.content?.trim()?.replace(/```json|```/g, '').trim();
-                    console.log("result", cleaned);
+                    }else{
 
-                    setCompletion(cleaned);//data?.choices[0]?.message.trim());
-                    setFinishReason(data?.choices[0]?.finish_reason);
+                        let cleaned = data?.choices[0]?.message?.content?.trim()?.replace(/```json|```/g, '').trim();
+                        console.log("result", cleaned);   
+                        setCompletion(cleaned);//data?.choices[0]?.message.trim());
+                        setFinishReason(data?.choices[0]?.finish_reason);
+                    }
                 })
                 .finally(() => {
                     console.log("Finished");

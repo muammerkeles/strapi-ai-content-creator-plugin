@@ -1,5 +1,5 @@
 
-# Strapi 5^ Ai Content Creator - Create Content With Open AI & Gemini
+# Create Content With Open AI and Gemini for Strapi (5 and later) project.
 
 ## ⚙️ Plugin Configuration
 
@@ -44,7 +44,10 @@ module.exports = ({ env }) => {
 
  ```
 
-Usage :
+# Gemini :
+<img width="1426" height="988" alt="image" src="https://github.com/user-attachments/assets/667064fc-af56-4b67-9619-b8ce32701808" />
+
+# GPT :
 <img width="1343" height="913" alt="image" src="https://github.com/user-attachments/assets/064e61eb-a818-4358-9af1-aecc7776e2d0" />
 
 <img width="1499" height="1021" alt="image" src="https://github.com/user-attachments/assets/8a930175-4912-4f66-b05c-9c08e7217999" />

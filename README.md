@@ -7,8 +7,6 @@ To start using the plugin, add the following configuration to your Strapi projec
 
 This setup enables the plugin and allows you to configure API keys and specify which Content Types the AI button should appear on.
 
-NOTE: Gemini is not implemented yet.
-Open AI is ready to use.
 
 [![GitHub Sponsor Düğmesi](https://img.shields.io/static/v1?label=GitHub&message=Sponsor&color=brightgreen&logo=github)](https://github.com/sponsors/muammerkeles)
 [![Ko-fi Düğmesi](https://img.shields.io/static/v1?label=Bize%20Kahve%20Ismarla&message=Destek%20Ol&color=orange&logo=ko-fi)](https://ko-fi.com/muammerkeles)

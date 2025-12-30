@@ -54,7 +54,7 @@ const ContentCreator = (props) => {
 
                         {/* Gemini Etkinse */}
                         {gemini && gemini.enabled === true && (
-                            <GeminiForWebpage config={openAi}/>
+                            <GeminiForWebpage config={gemini}/>
                         )}
 
                         {/* Hiçbiri Etkin Değilse (Örnek Butonları Kullanarak) */}
@@ -65,7 +65,7 @@ const ContentCreator = (props) => {
                                 </p>
                                 {/* Örnek olarak Button bileşenini kullandım */}
                                 <Button variant="danger-light">
-                                    AI Service not ready!
+                                    AI Service is not ready!
                                 </Button>
                             </>
                         )}

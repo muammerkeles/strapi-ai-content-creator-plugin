@@ -48,7 +48,7 @@ const OpenAIForWebpage = ({ config }) => {
 
     const { toggleNotification } = useNotification();
 
-    if (config && config?.contentList && config?.contentList.length>0 && !config?.contentList.includes(contentType?.uid)) {
+    if (config && config?.contentList && config?.contentList.length > 0 && !config?.contentList.includes(contentType?.uid)) {
         //if (contentType?.uid !== 'api::webpage.webpage') {
         return <>
             <p style={{ fontSize: '1rem' }} title="OpenAi is inactive for this page">GPT is Inactive!</p>
@@ -71,7 +71,7 @@ const OpenAIForWebpage = ({ config }) => {
         model: 'gpt-4.1-mini',
         temperature: 1,
         maxTokens: 500,
-        models: ['gpt-4.1-mini','o4-mini']
+        models: ['gpt-4.1-mini', 'o4-mini']
     }); // Güncel modelleri fetch etmedenönce bunları default olarak yükleyelim
 
     const [availableModels, setAvailableModels] = useState([]); // Kullanılabilir modeller listesi
@@ -135,7 +135,7 @@ const OpenAIForWebpage = ({ config }) => {
         if (!config.apiKey) {
             toggleNotification({
                 type: 'danger',
-                message: 'ERror : Api Key Not Found!'
+                message: 'Error : Api Key Not Found!'
             });
             return;
         }
@@ -173,10 +173,10 @@ const OpenAIForWebpage = ({ config }) => {
             return;
         }
 
-        console.log("Model:",model)
-        console.log("Prompt:",prompt)
-        console.log("Tempreture:",temperature)
-        console.log("MaxToken:",maxTokens)
+        console.log("Model:", model)
+        console.log("Prompt:", prompt)
+        console.log("Tempreture:", temperature)
+        console.log("MaxToken:", maxTokens)
         if (!prompt) {
             alert("Enter a prompt!!");
             return;
@@ -207,12 +207,17 @@ const OpenAIForWebpage = ({ config }) => {
                             type: 'danger',
                             message: 'Error : ' + data?.error?.message
                         });
-                    }else{
+                    } else {
 
                         let cleaned = data?.choices[0]?.message?.content?.trim()?.replace(/```json|```/g, '').trim();
                         setCompletion(cleaned);//data?.choices[0]?.message.trim());
                         setFinishReason(data?.choices[0]?.finish_reason);
                     }
+                }).catch(err => {
+                    toggleNotification({
+                        type: 'danger',
+                        message: 'API Error!'
+                    });
                 })
                 .finally(() => {
                     console.log("Finished");
@@ -266,7 +271,7 @@ const OpenAIForWebpage = ({ config }) => {
                                     onClick={() => handleApplyContent()}
                                     variant="success"
                                 >
-                                    Kullan
+                                    Use It
                                 </Button>
                             </td>
                         </tr>
@@ -408,7 +413,7 @@ const OpenAIForWebpage = ({ config }) => {
                         >
 
                             <Button variant="tertiary" onClick={() => setShowModal(false)}>
-                                Vazgeç
+                                Hide
                             </Button>
                             <Button onClick={() => handlePromptSubmit()} disabled={isGenerating}>{generateCompletionText}</Button>
                         </div>
@@ -424,7 +429,7 @@ const OpenAIForWebpage = ({ config }) => {
                     </Modal.Body>
                     <Modal.Footer>
                         <Modal.Close>
-                            <Button variant="tertiary">Vazgeç</Button>
+                            <Button variant="tertiary">Hide</Button>
                         </Modal.Close>
 
                     </Modal.Footer>

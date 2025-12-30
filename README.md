@@ -1,5 +1,5 @@
 
-# ai-content-creator - Create Content With Open AI & Gemini
+# Strapi 5^ Ai Content Creator - Create Content With Open AI & Gemini
 
 ## ⚙️ Plugin Configuration
 

@@ -1,16 +1,23 @@
 
 # Create Content With Open AI and Gemini for Strapi (5 and later) project.
 
-## ⚙️ Plugin Configuration
+[GitHub](https://github.com/muammerkeles/strapi-ai-content-creator-plugin) - [npm](https://www.npmjs.com/package/ai-content-creator)
 
+
+
+
+
+How to use?
+
+## ⚙️ Plugin Install
+install npm package 
+
+`npm i ai-content-creator`
+
+## ⚙️ Plugin Configuration
 To start using the plugin, add the following configuration to your Strapi project's `config/plugins.js` file.
 
 This setup enables the plugin and allows you to configure API keys and specify which Content Types the AI button should appear on.
-
-
-[![GitHub Sponsor Düğmesi](https://img.shields.io/static/v1?label=GitHub&message=Sponsor&color=brightgreen&logo=github)](https://github.com/sponsors/muammerkeles)
-[![Ko-fi Düğmesi](https://img.shields.io/static/v1?label=Bize%20Kahve%20Ismarla&message=Destek%20Ol&color=orange&logo=ko-fi)](https://ko-fi.com/muammerkeles)
-
 
 
 ```javascript
@@ -62,8 +69,10 @@ Thank you for considering supporting this project! Maintaining and developing ne
 * **GitHub Sponsors:** Contribute to the project's future and gain access to special perks.
 * **[External Platform (e.g., Ko-fi)]:** Buy us a one-time "coffee" to say thanks.
 
-[![GitHub Sponsor Button](https://img.shields.io/static/v1?label=GitHub&message=Sponsor&color=brightgreen&logo=github)](https://github.com/sponsors/muammerkeles)
+[![GitHub Sponsor ](https://img.shields.io/static/v1?label=GitHub&message=Sponsor&color=brightgreen&logo=github)](https://github.com/sponsors/muammerkeles)
 [![Ko-fi Button](https://img.shields.io/static/v1?label=Buy%20Me%20a%20Coffee&message=Donate&color=orange&logo=ko-fi)](https://ko-fi.com/muammerkeles)
+
+
 
 ## 💖 Desteğiniz İçin
 
